@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { useSetRecoilState, useResetRecoilState } from 'recoil'
 import { FaAngleUp, FaAngleDown, FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import { TilePositions, TileContent } from '../../../../Store'
+import { TileContent, ShowArrows } from '../../../../Store'
 
 export const StyledArrows = styled.div`
 position: absolute;
 height: 100%;
 width: 100%;
+z-index: 1;
 `
 
 const ArrowIcon = styled.div`
@@ -26,6 +27,7 @@ cursor: pointer;
 
 const Arrows = ({ column, row, tileNum }) => {
     const setTileContent = useSetRecoilState(TileContent)
+    const resetArrow = useResetRecoilState(ShowArrows)
 
     const moveTile = (e, num) => {
         let arrow = e.currentTarget.getAttribute('direction')
@@ -33,24 +35,26 @@ const Arrows = ({ column, row, tileNum }) => {
             case 1:
                 if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile1 !== null) {
+                        if (prevContent.tile1 !== null && prevContent.tile2 === null) {
                             let state = {
                                 ...prevContent,
                                 tile1: null,
                                 tile2: prevContent.tile1
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile1 !== null) {
+                        if (prevContent.tile1 !== null && prevContent.tile4 === null) {
                             let state = {
                                 ...prevContent,
                                 tile1: null,
                                 tile4: prevContent.tile1
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -60,36 +64,39 @@ const Arrows = ({ column, row, tileNum }) => {
             case 2:
                 if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile2 !== null) {
+                        if (prevContent.tile2 !== null && prevContent.tile3 === null) {
                             let state = {
                                 ...prevContent,
                                 tile2: null,
                                 tile3: prevContent.tile2
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile2 !== null) {
+                        if (prevContent.tile2 !== null && prevContent.tile5 === null) {
                             let state = {
                                 ...prevContent,
                                 tile2: null,
                                 tile5: prevContent.tile2
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile2 !== null) {
+                        if (prevContent.tile2 !== null && prevContent.tile1 === null) {
                             let state = {
                                 ...prevContent,
                                 tile2: null,
                                 tile1: prevContent.tile2
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -99,24 +106,26 @@ const Arrows = ({ column, row, tileNum }) => {
             case 3:
                 if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile3 !== null) {
+                        if (prevContent.tile3 !== null && prevContent.tile2 === null) {
                             let state = {
                                 ...prevContent,
                                 tile3: null,
                                 tile2: prevContent.tile3
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile3 !== null) {
+                        if (prevContent.tile3 !== null && prevContent.tile6 === null) {
                             let state = {
                                 ...prevContent,
                                 tile3: null,
                                 tile6: prevContent.tile3
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -126,36 +135,39 @@ const Arrows = ({ column, row, tileNum }) => {
             case 4:
                 if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile4 !== null) {
+                        if (prevContent.tile4 !== null && prevContent.tile1 === null) {
                             let state = {
                                 ...prevContent,
                                 tile4: null,
                                 tile1: prevContent.tile4
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile4 !== null) {
+                        if (prevContent.tile4 !== null && prevContent.tile5 === null) {
                             let state = {
                                 ...prevContent,
                                 tile4: null,
                                 tile5: prevContent.tile4
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile4 !== null) {
+                        if (prevContent.tile4 !== null && prevContent.tile7 === null) {
                             let state = {
                                 ...prevContent,
                                 tile4: null,
                                 tile7: prevContent.tile4
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -165,48 +177,52 @@ const Arrows = ({ column, row, tileNum }) => {
             case 5:
                 if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile5 !== null) {
+                        if (prevContent.tile5 !== null && prevContent.tile2 === null) {
                             let state = {
                                 ...prevContent,
                                 tile5: null,
                                 tile2: prevContent.tile5
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile5 !== null) {
+                        if (prevContent.tile5 !== null && prevContent.tile6 === null) {
                             let state = {
                                 ...prevContent,
                                 tile5: null,
                                 tile6: prevContent.tile5
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile5 !== null) {
+                        if (prevContent.tile5 !== null && prevContent.tile8 === null) {
                             let state = {
                                 ...prevContent,
                                 tile5: null,
                                 tile8: prevContent.tile5
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile5 !== null) {
+                        if (prevContent.tile5 !== null && prevContent.tile4 === null) {
                             let state = {
                                 ...prevContent,
                                 tile5: null,
                                 tile4: prevContent.tile5
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -216,36 +232,39 @@ const Arrows = ({ column, row, tileNum }) => {
             case 6:
                 if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile6 !== null) {
+                        if (prevContent.tile6 !== null && prevContent.tile3 === null) {
                             let state = {
                                 ...prevContent,
                                 tile6: null,
                                 tile3: prevContent.tile6
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'down') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile6 !== null) {
+                        if (prevContent.tile6 !== null && prevContent.tile9 === null) {
                             let state = {
                                 ...prevContent,
                                 tile6: null,
                                 tile9: prevContent.tile6
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile6 !== null) {
+                        if (prevContent.tile6 !== null && prevContent.tile5 === null) {
                             let state = {
                                 ...prevContent,
                                 tile6: null,
                                 tile5: prevContent.tile6
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -255,24 +274,26 @@ const Arrows = ({ column, row, tileNum }) => {
             case 7:
                 if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile7 !== null) {
+                        if (prevContent.tile7 !== null && prevContent.tile4 === null) {
                             let state = {
                                 ...prevContent,
                                 tile7: null,
                                 tile4: prevContent.tile7
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile7 !== null) {
+                        if (prevContent.tile7 !== null && prevContent.tile8 === null) {
                             let state = {
                                 ...prevContent,
                                 tile7: null,
                                 tile8: prevContent.tile7
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -282,36 +303,39 @@ const Arrows = ({ column, row, tileNum }) => {
             case 8:
                 if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile8 !== null) {
+                        if (prevContent.tile8 !== null && prevContent.tile7 === null) {
                             let state = {
                                 ...prevContent,
                                 tile8: null,
                                 tile7: prevContent.tile8
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile8 !== null) {
+                        if (prevContent.tile8 !== null && prevContent.tile5 === null) {
                             let state = {
                                 ...prevContent,
                                 tile8: null,
                                 tile5: prevContent.tile8
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'right') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile8 !== null) {
+                        if (prevContent.tile8 !== null && prevContent.tile9 === null) {
                             let state = {
                                 ...prevContent,
                                 tile8: null,
                                 tile9: prevContent.tile8
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
@@ -321,24 +345,26 @@ const Arrows = ({ column, row, tileNum }) => {
             case 9:
                 if (arrow === 'left') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile9 !== null) {
+                        if (prevContent.tile9 !== null && prevContent.tile8 === null) {
                             let state = {
                                 ...prevContent,
                                 tile9: null,
                                 tile8: prevContent.tile9
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent
                     })
                 } else if (arrow === 'up') {
                     setTileContent(prevContent => {
-                        if (prevContent.tile89!== null) {
+                        if (prevContent.tile9!== null && prevContent.tile6 === null) {
                             let state = {
                                 ...prevContent,
                                 tile9: null,
                                 tile6: prevContent.tile9
                             }
+                            resetArrow()
                             return state
                         }
                         return prevContent

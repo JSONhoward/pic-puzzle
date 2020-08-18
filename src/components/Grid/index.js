@@ -9,6 +9,7 @@ const StyledGrid = styled.div`
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-template-rows: repeat(3, 1fr);
+overflow: hidden;
 `
 
 const GridContainer = styled.div`
@@ -27,7 +28,10 @@ const Grid = () => {
     const tilePos = useRecoilValue(TilePositions)
     const showArrow = useRecoilValue(ShowArrows)
     const tileContent = useRecoilValue(TileContent)
+    
     const {tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9} = tilePos
+
+    
 
     return (
         <GridContainer>
@@ -40,7 +44,7 @@ const Grid = () => {
                 <Tile tileId={6} column={tile6.col} row={tile6.row} show={showArrow.tile6} content={tileContent.tile6}/>
                 <Tile tileId={7} column={tile7.col} row={tile7.row} show={showArrow.tile7} content={tileContent.tile7}/>
                 <Tile tileId={8} column={tile8.col} row={tile8.row} show={showArrow.tile8} content={tileContent.tile8}/>
-                <Tile tileId={9} column={tile9.col} row={tile9.row} show={showArrow.tile9} content={null} hide={true}/>
+                <Tile tileId={9} column={tile9.col} row={tile9.row} show={showArrow.tile9} content={tileContent.tile9}/>
             </StyledGrid>
         </GridContainer>
     )

@@ -1,4 +1,10 @@
 import {atom} from 'recoil'
+import puzzleImg from '../images/white-bricks.jpeg'
+
+export const puzzleImage = atom({
+    key: 'puzzleImage',
+    default: puzzleImg
+})
 
 export const TilePositions = atom({
     key: 'tilePos',
@@ -18,15 +24,15 @@ export const TilePositions = atom({
 export const TileContent = atom({
     key: 'tileContent',
     default: {
-        tile1: 1,
+        tile1: 7,
         tile2: 2,
         tile3: 3,
-        tile4: 4,
-        tile5: 5,
-        tile6: 6,
-        tile7: 7,
-        tile8: 8,
-        tile9: 9,
+        tile4: 8,
+        tile5: 1,
+        tile6: 4,
+        tile7: 5,
+        tile8: 6,
+        tile9: null,
     }
 })
 
