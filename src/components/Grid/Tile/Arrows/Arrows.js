@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { useSetRecoilState, useResetRecoilState } from 'recoil'
 import { FaAngleUp, FaAngleDown, FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import { TileContent, ShowArrows } from '../../../../Store'
+import { TileContent, ShowArrows, TileMoves } from '../../../../Store'
 
 export const StyledArrows = styled.div`
 position: absolute;
@@ -19,15 +20,17 @@ right: ${props => props.direction === 'right' ? '5px' : 'none'};
 bottom: ${props => props.direction === 'down' ? '5px' : 'none'};
 transform: ${props => props.direction === 'left' || props.direction === 'right' ? 'translateY(-50%)' : 'translateX(-50%)'};
 cursor: pointer;
+color: rgb(30,30,30);
 
 &:hover {
-    color: yellow;
+    color: red;
 }
 `
 
 const Arrows = ({ column, row, tileNum }) => {
     const setTileContent = useSetRecoilState(TileContent)
     const resetArrow = useResetRecoilState(ShowArrows)
+    const incrementMoves = useSetRecoilState(TileMoves)
 
     const moveTile = (e, num) => {
         let arrow = e.currentTarget.getAttribute('direction')
@@ -42,6 +45,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile2: prevContent.tile1
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -55,6 +59,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile4: prevContent.tile1
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -71,6 +76,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile3: prevContent.tile2
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -84,6 +90,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile5: prevContent.tile2
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -97,6 +104,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile1: prevContent.tile2
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -113,6 +121,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile2: prevContent.tile3
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -126,6 +135,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile6: prevContent.tile3
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -142,6 +152,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile1: prevContent.tile4
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -155,6 +166,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile5: prevContent.tile4
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -168,6 +180,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile7: prevContent.tile4
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -184,6 +197,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile2: prevContent.tile5
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -197,6 +211,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile6: prevContent.tile5
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -210,6 +225,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile8: prevContent.tile5
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -223,6 +239,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile4: prevContent.tile5
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -239,6 +256,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile3: prevContent.tile6
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -252,6 +270,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile9: prevContent.tile6
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -265,6 +284,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile5: prevContent.tile6
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -281,6 +301,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile4: prevContent.tile7
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -294,6 +315,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile8: prevContent.tile7
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -310,6 +332,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile7: prevContent.tile8
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -323,6 +346,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile5: prevContent.tile8
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -336,6 +360,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile9: prevContent.tile8
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -352,6 +377,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile8: prevContent.tile9
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -365,6 +391,7 @@ const Arrows = ({ column, row, tileNum }) => {
                                 tile6: prevContent.tile9
                             }
                             resetArrow()
+                            incrementMoves(prevCount => prevCount + 1)
                             return state
                         }
                         return prevContent
@@ -384,6 +411,12 @@ const Arrows = ({ column, row, tileNum }) => {
             {row !== 3 && <ArrowIcon onClick={e => moveTile(e, tileNum)} direction={'down'}><FaAngleDown size={'3rem'} /></ArrowIcon>}
         </StyledArrows>
     )
+}
+
+Arrows.propTypes = {
+    column: PropTypes.number,
+    row: PropTypes.number,
+    tileNum: PropTypes.number
 }
 
 export default Arrows

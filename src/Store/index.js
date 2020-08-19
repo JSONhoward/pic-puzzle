@@ -1,9 +1,18 @@
 import {atom} from 'recoil'
-import puzzleImg from '../images/white-bricks.jpeg'
 
 export const puzzleImage = atom({
     key: 'puzzleImage',
-    default: puzzleImg
+    default: `https://i.picsum.photos/id/1048/1000/1000.jpg?hmac=lnJJegbiTivJmeOu5t9OweCS7TQEr2l7H1Cnfwwngo8`
+})
+
+export const LoadingState = atom({
+    key: 'loading',
+    default: false
+})
+
+export const TileMoves = atom({
+    key: 'moves',
+    default: 0
 })
 
 export const TilePositions = atom({

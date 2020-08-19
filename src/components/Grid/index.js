@@ -1,9 +1,20 @@
 import React from 'react'
-import styled from 'styled-components'
-import {useRecoilValue} from 'recoil'
+import styled, { keyframes } from 'styled-components'
+import { useRecoilValue, useRecoilState, useSetRecoilState, useResetRecoilState } from 'recoil'
+import { FaSpinner, FaPuzzlePiece } from 'react-icons/fa'
 
 import Tile from './Tile/Tile'
-import { TilePositions, ShowArrows, TileContent } from '../../Store'
+import { TilePositions, ShowArrows, TileContent, LoadingState, puzzleImage, TileMoves } from '../../Store'
+
+const spinnerAnimation = keyframes`
+    from {
+    transform: rotate(0deg);
+    }
+
+    to {
+    transform: rotate(360deg);
+    }
+`
 
 const StyledGrid = styled.div`
 display: grid;
@@ -12,41 +23,140 @@ grid-template-rows: repeat(3, 1fr);
 overflow: hidden;
 `
 
+const TitleContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+height: 4rem;
+width: 80vw;
+max-width: 80vh;
+color: rgb(30,30,30);
+font-size: clamp(1rem, 5vw, 2rem);
+`
+
+const Loading = styled.div`
+position: relative;
+height: 100%;
+width: 100%;
+display: grid;
+place-items: center;
+color: black;
+grid-column: ${props => props.column};
+grid-row: ${props => props.row};
+overflow: hidden;
+`
+
+const Spinner = styled.div`
+animation: ${spinnerAnimation} 2s linear;
+`
+
 const GridContainer = styled.div`
 display: grid;
-height: 90vh;
-width: 90vh;
-border: 2px solid white;
+height: 80vh;
+width: 80vh;
+border: 2px solid rgb(30,30,30);
 
 @media screen and (orientation: portrait) {
-    height: 90vw;
-    width: 90vw;
+    height: 80vw;
+    width: 80vw;
+}
+`
+
+const ButtonContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 15vh;
+width: 80vh;
+
+button {
+    height: 3rem;
+    width: 5rem;
+    color: whitesmoke;
+    background-color: rgb(30,30,30);
+    border: none;
+    box-shadow: 1px 1px rgb(0,0,0,.5);
+}
+
+@media screen and (orientation: portrait) {
+    width: 80vw;
 }
 `
 
 const Grid = () => {
     const tilePos = useRecoilValue(TilePositions)
     const showArrow = useRecoilValue(ShowArrows)
-    const tileContent = useRecoilValue(TileContent)
-    
-    const {tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9} = tilePos
+    const [tileContent, setTileContent] = useRecoilState(TileContent)
+    const [loading, setLoading] = useRecoilState(LoadingState)
+    const setImage = useSetRecoilState(puzzleImage)
+    const resetTiles = useResetRecoilState(TileContent)
+    const resetMoves = useResetRecoilState(TileMoves)
 
-    
+    const { tile1, tile2, tile3, tile4, tile5, tile6, tile7, tile8, tile9 } = tilePos
+
+    const getNewImage = async () => {
+        setLoading(true)
+        resetMoves()
+        resetTiles()
+        let img = await fetch(`https://picsum.photos/1000`)
+        setImage(img.url)
+        setLoading(false)
+    }
+
+    const shuffleTileContent = async () => {
+        const arr = await [1, 2, 3, 4, 5, 6, 7, 8, null].sort((a, b) => .5 - Math.random())
+        const obj = {
+            tile1: arr[0],
+            tile2: arr[1],
+            tile3: arr[2],
+            tile4: arr[3],
+            tile5: arr[4],
+            tile6: arr[5],
+            tile7: arr[6],
+            tile8: arr[7],
+            tile9: arr[8],
+        }
+        setTileContent(obj)
+    }
 
     return (
-        <GridContainer>
-            <StyledGrid >
-                <Tile tileId={1} column={tile1.col} row={tile1.row} show={showArrow.tile1} content={tileContent.tile1}/>
-                <Tile tileId={2} column={tile2.col} row={tile2.row} show={showArrow.tile2} content={tileContent.tile2}/>
-                <Tile tileId={3} column={tile3.col} row={tile3.row} show={showArrow.tile3} content={tileContent.tile3}/>
-                <Tile tileId={4} column={tile4.col} row={tile4.row} show={showArrow.tile4} content={tileContent.tile4}/>
-                <Tile tileId={5} column={tile5.col} row={tile5.row} show={showArrow.tile5} content={tileContent.tile5}/>
-                <Tile tileId={6} column={tile6.col} row={tile6.row} show={showArrow.tile6} content={tileContent.tile6}/>
-                <Tile tileId={7} column={tile7.col} row={tile7.row} show={showArrow.tile7} content={tileContent.tile7}/>
-                <Tile tileId={8} column={tile8.col} row={tile8.row} show={showArrow.tile8} content={tileContent.tile8}/>
-                <Tile tileId={9} column={tile9.col} row={tile9.row} show={showArrow.tile9} content={tileContent.tile9}/>
-            </StyledGrid>
-        </GridContainer>
+        <>
+        <TitleContainer>
+        <FaPuzzlePiece size={'2rem'} />
+        <h1>Pic Puzzle</h1>
+        </TitleContainer>
+            <GridContainer>
+                {
+                    loading ?
+                        (
+                            <Loading>
+                                <Spinner>
+                                    <FaSpinner size={'4rem'} />
+                                </Spinner>
+                            </Loading>
+                        )
+                        :
+                        (
+                            <StyledGrid >
+                                <Tile tileId={1} column={tile1.col} row={tile1.row} show={showArrow.tile1} content={tileContent.tile1} />
+                                <Tile tileId={2} column={tile2.col} row={tile2.row} show={showArrow.tile2} content={tileContent.tile2} />
+                                <Tile tileId={3} column={tile3.col} row={tile3.row} show={showArrow.tile3} content={tileContent.tile3} />
+                                <Tile tileId={4} column={tile4.col} row={tile4.row} show={showArrow.tile4} content={tileContent.tile4} />
+                                <Tile tileId={5} column={tile5.col} row={tile5.row} show={showArrow.tile5} content={tileContent.tile5} />
+                                <Tile tileId={6} column={tile6.col} row={tile6.row} show={showArrow.tile6} content={tileContent.tile6} />
+                                <Tile tileId={7} column={tile7.col} row={tile7.row} show={showArrow.tile7} content={tileContent.tile7} />
+                                <Tile tileId={8} column={tile8.col} row={tile8.row} show={showArrow.tile8} content={tileContent.tile8} />
+                                <Tile tileId={9} column={tile9.col} row={tile9.row} show={showArrow.tile9} content={tileContent.tile9} />
+                            </StyledGrid>
+                        )
+                }
+            </GridContainer>
+            <ButtonContainer>
+                <button onClick={getNewImage}>New Image</button>
+                <button onClick={shuffleTileContent}>Shuffle</button>
+                <button onClick={() => resetTiles()}>Reset</button>
+            </ButtonContainer>
+        </>
     )
 }
 
