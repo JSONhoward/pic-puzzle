@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useRecoilValue, useRecoilState, useSetRecoilState, useResetRecoilState } from 'recoil'
-import { FaSpinner, FaPuzzlePiece } from 'react-icons/fa'
+import { FaSpinner } from 'react-icons/fa'
 
 import Tile from './Tile/Tile'
 import { TilePositions, ShowArrows, TileContent, LoadingState, puzzleImage, TileMoves } from '../../Store'
