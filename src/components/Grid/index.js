@@ -72,10 +72,12 @@ width: 80vh;
 button {
     height: 3rem;
     width: 5rem;
+    font-size: 1.25rem;
     color: whitesmoke;
     background-color: rgb(30,30,30);
     border: none;
-    box-shadow: 1px 1px rgb(0,0,0,.5);
+    box-shadow: 1px 1px 5px rgb(0,0,0,.5);
+    border-radius: 5px;
 }
 
 @media screen and (orientation: portrait) {
@@ -122,7 +124,6 @@ const Grid = () => {
     return (
         <>
         <TitleContainer>
-        <FaPuzzlePiece size={'2rem'} />
         <h1>Pic Puzzle</h1>
         </TitleContainer>
             <GridContainer>

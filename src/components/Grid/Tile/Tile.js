@@ -24,6 +24,7 @@ display: grid;
 place-items: center;
 height: 100%;
 width: 100%;
+font-size: 2rem;
 background-color: rgb(30,30,30);
 `
 
