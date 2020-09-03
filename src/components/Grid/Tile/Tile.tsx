@@ -20,11 +20,11 @@ display: grid;
 place-items: center;
 height: 100%;
 width: 100%;
-font-size: 2rem;
+font-size: 1rem;
 background-color: rgb(30,30,30);
 `
 
-const ContentImage = styled('div')<{tile: Number, bg: String}>`
+const ContentImage = styled('div')<{tile: number, bg: string, name: number}>`
 position: relative;
 height: 100%;
 width: 100%;
@@ -33,23 +33,23 @@ background-size: 80vh;
 background-position: ${props => {
         switch (props.tile) {
             case 1:
-                return '0 0'
+                return '0% 0%'
             case 2:
-                return '50% 0'
+                return '50% 0%'
             case 3:
-                return '100% 0'
+                return '100% 0%'
             case 4:
-                return '0 50%'
+                return '0% 50%'
             case 5:
                 return '50% 50%'
             case 6:
                 return '100% 50%'
             case 7:
-                return '0 100%'
+                return '0% 100%'
             case 8:
                 return '50% 100%'
             default:
-                return '0 0'
+                return '0% 0%'
         }
     }};
 
@@ -59,28 +59,29 @@ background-position: ${props => {
 `
 
 type TileProps = {
-    column: Number,
-    row: Number,
-    content: Number | null,
-    show: Boolean,
-    tileId: Number
+    column: number,
+    row: number,
+    content: number | null,
+    show: boolean,
+    tileId: number
 }
 
 const Tile: React.FC<TileProps> = ({ column, row, content, show, tileId }) => {
     const resetArrows = useResetRecoilState(ShowArrows)
-    const tileImage = useRecoilValue<String>(puzzleImage)
-    const tileContent = useRecoilValue<Object>(TileContent)
-    const setShowArrow = useSetRecoilState<Boolean | any>(ShowArrows)
+    const tileImage = useRecoilValue<string>(puzzleImage)
+    const tileContent = useRecoilValue<any>(TileContent)
+    const setShowArrow = useSetRecoilState<boolean | any>(ShowArrows)
     const moveCount = useRecoilValue(TileMoves)
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-        let element = e.target as HTMLElement
-        const tileNum = element.getAttribute('name')
+        const element = e.currentTarget as HTMLDivElement
+        const tileNum: any = element.getAttribute('name')
         const tileContentProperty = (tileContent as {[key: string]: any})[`tile${tileNum}`]
+
         resetArrows()
         setShowArrow((prevVal: any) => {
             if (tileContentProperty !== null) {
-                let state = {
+                const state = {
                     ...prevVal,
                     [`tile${tileNum}`]: true
                 }
@@ -104,7 +105,7 @@ const Tile: React.FC<TileProps> = ({ column, row, content, show, tileId }) => {
                     )
                     :
                     (
-                        <ContentImage onMouseEnter={(e: React.MouseEvent<HTMLDivElement>): void => handleMouseEnter(e)} onMouseLeave={resetArrows} bg={tileImage} tile={content}>
+                        <ContentImage name={tileId} onMouseEnter={(e: React.MouseEvent<HTMLDivElement>): void => handleMouseEnter(e)} onMouseLeave={resetArrows} bg={tileImage} tile={content}>
                             {show && <Arrows tileNum={tileId} column={column} row={row} />}
                         </ContentImage>
                     )

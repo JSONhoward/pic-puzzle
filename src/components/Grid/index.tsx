@@ -5,7 +5,7 @@ import { FaSpinner } from 'react-icons/fa'
 
 import Tile from './Tile/Tile'
 import { TilePositions, ShowArrows, TileContent, LoadingState, puzzleImage, TileMoves } from '../../Store'
-import {shuffleTileContent} from './Grid-utils'
+import { shuffleTileContent } from './Grid-utils'
 
 const spinnerAnimation = keyframes`
     from {
@@ -33,6 +33,10 @@ width: 80vw;
 max-width: 80vh;
 color: rgb(30,30,30);
 font-size: clamp(1rem, 5vw, 2rem);
+
+h1 {
+    text-shadow: 1px 1px 5px rgba(0,0,0,.5);
+}
 `
 
 const Loading = styled('div')`
@@ -53,7 +57,9 @@ const GridContainer = styled.div`
 display: grid;
 height: 80vh;
 width: 80vh;
-border: 2px solid rgb(30,30,30);
+/* border: 2px solid rgb(30,30,30); */
+box-shadow: 1px 1px 5px black;
+
 
 @media screen and (orientation: portrait) {
     height: 80vw;
@@ -70,16 +76,23 @@ width: 80vh;
 
 button {
     height: 3rem;
-    width: 5rem;
-    font-size: 1.25rem;
+    width: 7rem;
     color: whitesmoke;
     background-color: rgb(30,30,30);
     border: none;
     box-shadow: 1px 1px 5px rgb(0,0,0,.5);
     border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
 }
+
 @media screen and (orientation: portrait) {
     width: 80vw;
+        font-size: .5rem;
+
+    button {
+        width: 5rem;
+    }
 }
 `
 
@@ -98,7 +111,7 @@ const Grid = () => {
         setLoading(true)
         resetMoves()
         resetTiles()
-        let img = await fetch(`https://picsum.photos/1000`) 
+        let img = await fetch(`https://picsum.photos/1000`)
         setImage(img.url)
         setLoading(false)
     }

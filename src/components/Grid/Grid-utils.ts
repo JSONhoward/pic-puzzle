@@ -1,5 +1,5 @@
-export const shuffleTileContent = (): any => {
-    const arr = [1, 2, 3, 4, 5, 6, 7, 8, null].sort((a, b) => .5 - Math.random())
+export const shuffleTileContent = async (): Promise<any> => {
+    const arr = await [1, 2, 3, 4, 5, 6, 7, 8, null].sort((a, b) => .5 - Math.random())
     const obj = {
         tile1: arr[0],
         tile2: arr[1],
