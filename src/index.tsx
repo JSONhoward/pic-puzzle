@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { RecoilRoot } from 'recoil'
 import './Styles/index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import * as serviceWorker from './serviceWorker'; TODO service worker type definition
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,4 +14,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.unregister();
+// serviceWorker.unregister();

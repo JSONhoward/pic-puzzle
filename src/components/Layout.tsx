@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 
 const StyledLayout = styled.div`
@@ -8,10 +8,10 @@ align-items: center;
 justify-content: center;
 height: 100vh;
 width: 100vw;
-background-color: ${props => props.theme.bg};
+background-color: ${({theme: {bg}}) => bg};
 `
 
-const Layout = ({children}) => {
+const Layout: React.FC = ({children}) => {
     return (
         <StyledLayout>
             {children}

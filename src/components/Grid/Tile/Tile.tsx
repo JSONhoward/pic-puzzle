@@ -1,20 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { useResetRecoilState, useSetRecoilState, useRecoilValue } from 'recoil'
-
 
 import Arrows from './Arrows/Arrows'
 import { ShowArrows, puzzleImage, TileContent, TileMoves } from '../../../Store'
 
-
-
-const StyledTile = styled.div`
+const StyledTile = styled('div')<{col: any, row: any}>`
 position: relative;
 display: grid;
 place-items: center;
 color: white;
-grid-column: ${props => props.column};
+grid-column: ${props => props.col};
 grid-row: ${props => props.row};
 overflow: hidden;
 `
@@ -28,7 +24,7 @@ font-size: 2rem;
 background-color: rgb(30,30,30);
 `
 
-const ContentImage = styled.div`
+const ContentImage = styled('div')<{tile: Number, bg: String}>`
 position: relative;
 height: 100%;
 width: 100%;
@@ -62,18 +58,28 @@ background-position: ${props => {
 }
 `
 
-const Tile = ({ column, row, content, show, tileId }) => {
+type TileProps = {
+    column: Number,
+    row: Number,
+    content: Number | null,
+    show: Boolean,
+    tileId: Number
+}
+
+const Tile: React.FC<TileProps> = ({ column, row, content, show, tileId }) => {
     const resetArrows = useResetRecoilState(ShowArrows)
-    const tileImage = useRecoilValue(puzzleImage)
-    const tileContent = useRecoilValue(TileContent)
-    const setShowArrow = useSetRecoilState(ShowArrows)
+    const tileImage = useRecoilValue<String>(puzzleImage)
+    const tileContent = useRecoilValue<Object>(TileContent)
+    const setShowArrow = useSetRecoilState<Boolean | any>(ShowArrows)
     const moveCount = useRecoilValue(TileMoves)
 
-    const handleMouseEnter = (e) => {
-        const tileNum = e.target.getAttribute('name')
+    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+        let element = e.target as HTMLElement
+        const tileNum = element.getAttribute('name')
+        const tileContentProperty = (tileContent as {[key: string]: any})[`tile${tileNum}`]
         resetArrows()
-        setShowArrow(prevVal => {
-            if (tileContent[`tile${tileNum}`] !== null) {
+        setShowArrow((prevVal: any) => {
+            if (tileContentProperty !== null) {
                 let state = {
                     ...prevVal,
                     [`tile${tileNum}`]: true
@@ -86,7 +92,7 @@ const Tile = ({ column, row, content, show, tileId }) => {
 
     return (
 
-        <StyledTile tileId={tileId} column={column} row={row}>
+        <StyledTile col={column} row={row}>
             {
                 content === null ?
                     (
@@ -98,7 +104,7 @@ const Tile = ({ column, row, content, show, tileId }) => {
                     )
                     :
                     (
-                        <ContentImage name={tileId} onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={resetArrows} bg={tileImage} tile={content}>
+                        <ContentImage onMouseEnter={(e: React.MouseEvent<HTMLDivElement>): void => handleMouseEnter(e)} onMouseLeave={resetArrows} bg={tileImage} tile={content}>
                             {show && <Arrows tileNum={tileId} column={column} row={row} />}
                         </ContentImage>
                     )
@@ -106,14 +112,6 @@ const Tile = ({ column, row, content, show, tileId }) => {
         </StyledTile>
 
     )
-}
-
-Tile.propTypes = {
-    column: PropTypes.number.isRequired,
-    row: PropTypes.number.isRequired,
-    content: PropTypes.number,
-    show: PropTypes.bool.isRequired,
-    tileId: PropTypes.number.isRequired
 }
 
 export default Tile

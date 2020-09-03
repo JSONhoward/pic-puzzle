@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { theme } from './Styles/theme';
 import Home from './pages/Home'
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -18,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid snapshot renders 1`] = `
+Array [
+  <div
+    className="sc-AxheI eJzeyW"
+  >
+    <h1>
+      Pic Puzzle
+    </h1>
+  </div>,
+  <div
+    className="sc-fzozJi kKumCr"
+  >
+    <div
+      className="sc-AxgMl fZYJkD"
+    >
+      <div
+        className="sc-AxiKw cqNfzH"
+      >
+        <div
+          className="sc-AxhUy jSPAqZ"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw fxedzc"
+      >
+        <div
+          className="sc-AxhUy gbJWex"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw doYfNl"
+      >
+        <div
+          className="sc-AxhUy eQrzmt"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw NKdhk"
+      >
+        <div
+          className="sc-AxhUy eJuMbV"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw dyBRAT"
+      >
+        <div
+          className="sc-AxhUy iNZIgF"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw dEfzWu"
+      >
+        <div
+          className="sc-AxhUy gmqEsF"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw kJQusF"
+      >
+        <div
+          className="sc-AxhUy iepAeh"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw boeBja"
+      >
+        <div
+          className="sc-AxhUy hHfvuJ"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        />
+      </div>
+      <div
+        className="sc-AxiKw cetqCv"
+      >
+        <div
+          className="sc-AxhCb kcTqYI"
+        >
+          <p>
+            Moves: 
+            0
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sc-fzoLsD rMyie"
+  >
+    <button
+      onClick={[Function]}
+    >
+      New Image
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Shuffle
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Reset
+    </button>
+  </div>,
+]
+`;

@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 import Layout from '../components/Layout'
 import Grid from '../components/Grid'
 
-const Home = () => {
+const Home: React.FC = () => {
     return (
         <Layout>
             <Grid />

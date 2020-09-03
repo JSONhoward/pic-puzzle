@@ -5,6 +5,7 @@ import { FaSpinner } from 'react-icons/fa'
 
 import Tile from './Tile/Tile'
 import { TilePositions, ShowArrows, TileContent, LoadingState, puzzleImage, TileMoves } from '../../Store'
+import {shuffleTileContent} from './Grid-utils'
 
 const spinnerAnimation = keyframes`
     from {
@@ -34,15 +35,13 @@ color: rgb(30,30,30);
 font-size: clamp(1rem, 5vw, 2rem);
 `
 
-const Loading = styled.div`
+const Loading = styled('div')`
 position: relative;
 height: 100%;
 width: 100%;
 display: grid;
 place-items: center;
 color: black;
-grid-column: ${props => props.column};
-grid-row: ${props => props.row};
 overflow: hidden;
 `
 
@@ -79,7 +78,6 @@ button {
     box-shadow: 1px 1px 5px rgb(0,0,0,.5);
     border-radius: 5px;
 }
-
 @media screen and (orientation: portrait) {
     width: 80vw;
 }
@@ -100,32 +98,16 @@ const Grid = () => {
         setLoading(true)
         resetMoves()
         resetTiles()
-        let img = await fetch(`https://picsum.photos/1000`)
+        let img = await fetch(`https://picsum.photos/1000`) 
         setImage(img.url)
         setLoading(false)
     }
 
-    const shuffleTileContent = async () => {
-        const arr = await [1, 2, 3, 4, 5, 6, 7, 8, null].sort((a, b) => .5 - Math.random())
-        const obj = {
-            tile1: arr[0],
-            tile2: arr[1],
-            tile3: arr[2],
-            tile4: arr[3],
-            tile5: arr[4],
-            tile6: arr[5],
-            tile7: arr[6],
-            tile8: arr[7],
-            tile9: arr[8],
-        }
-        setTileContent(obj)
-    }
-
     return (
         <>
-        <TitleContainer>
-        <h1>Pic Puzzle</h1>
-        </TitleContainer>
+            <TitleContainer>
+                <h1>Pic Puzzle</h1>
+            </TitleContainer>
             <GridContainer>
                 {
                     loading ?
@@ -138,7 +120,7 @@ const Grid = () => {
                         )
                         :
                         (
-                            <StyledGrid >
+                            <StyledGrid>
                                 <Tile tileId={1} column={tile1.col} row={tile1.row} show={showArrow.tile1} content={tileContent.tile1} />
                                 <Tile tileId={2} column={tile2.col} row={tile2.row} show={showArrow.tile2} content={tileContent.tile2} />
                                 <Tile tileId={3} column={tile3.col} row={tile3.row} show={showArrow.tile3} content={tileContent.tile3} />
@@ -154,7 +136,7 @@ const Grid = () => {
             </GridContainer>
             <ButtonContainer>
                 <button onClick={getNewImage}>New Image</button>
-                <button onClick={shuffleTileContent}>Shuffle</button>
+                <button onClick={() => shuffleTileContent().then((obj: any) => setTileContent(obj))}>Shuffle</button>
                 <button onClick={() => resetTiles()}>Reset</button>
             </ButtonContainer>
         </>
