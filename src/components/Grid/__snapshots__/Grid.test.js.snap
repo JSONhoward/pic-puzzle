@@ -3,14 +3,14 @@
 exports[`Grid snapshot renders 1`] = `
 Array [
   <div
-    className="sc-AxheI eJzeyW"
+    className="sc-AxheI kzfhRj"
   >
     <h1>
       Pic Puzzle
     </h1>
   </div>,
   <div
-    className="sc-fzozJi kKumCr"
+    className="sc-fzozJi cLeQoS"
   >
     <div
       className="sc-AxgMl fZYJkD"
@@ -19,7 +19,8 @@ Array [
         className="sc-AxiKw cqNfzH"
       >
         <div
-          className="sc-AxhUy jSPAqZ"
+          className="sc-AxhUy gvYPGg"
+          name={1}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -28,7 +29,8 @@ Array [
         className="sc-AxiKw fxedzc"
       >
         <div
-          className="sc-AxhUy gbJWex"
+          className="sc-AxhUy bGiStg"
+          name={2}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -37,7 +39,8 @@ Array [
         className="sc-AxiKw doYfNl"
       >
         <div
-          className="sc-AxhUy eQrzmt"
+          className="sc-AxhUy XuOOw"
+          name={3}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -47,6 +50,7 @@ Array [
       >
         <div
           className="sc-AxhUy eJuMbV"
+          name={4}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -55,7 +59,8 @@ Array [
         className="sc-AxiKw dyBRAT"
       >
         <div
-          className="sc-AxhUy iNZIgF"
+          className="sc-AxhUy kICiMF"
+          name={5}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -64,7 +69,8 @@ Array [
         className="sc-AxiKw dEfzWu"
       >
         <div
-          className="sc-AxhUy gmqEsF"
+          className="sc-AxhUy kxaElg"
+          name={6}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -74,6 +80,7 @@ Array [
       >
         <div
           className="sc-AxhUy iepAeh"
+          name={7}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -83,6 +90,7 @@ Array [
       >
         <div
           className="sc-AxhUy hHfvuJ"
+          name={8}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         />
@@ -102,7 +110,7 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-fzoLsD rMyie"
+    className="sc-fzoLsD hJsyGF"
   >
     <button
       onClick={[Function]}

@@ -116,6 +116,11 @@ const Grid = () => {
         setLoading(false)
     }
 
+    const handleReset = () => {
+        resetTiles()
+        resetMoves()
+    }
+
     return (
         <>
             <TitleContainer>
@@ -150,7 +155,7 @@ const Grid = () => {
             <ButtonContainer>
                 <button onClick={getNewImage}>New Image</button>
                 <button onClick={() => shuffleTileContent().then((obj: any) => setTileContent(obj))}>Shuffle</button>
-                <button onClick={() => resetTiles()}>Reset</button>
+                <button onClick={handleReset}>Reset</button>
             </ButtonContainer>
         </>
     )
